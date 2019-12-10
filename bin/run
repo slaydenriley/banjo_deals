@@ -2,6 +2,7 @@
 
 require_relative "../lib/banjos.rb"
 require_relative "../lib/cli.rb"
-require_relative "../lib/banjoscraper.rb"
+require_relative "../lib/scraper.rb"
 
-Banjos.new("hello", "hello", "hello").start
+
+Cli.new.start
