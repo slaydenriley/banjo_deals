@@ -1,3 +1,4 @@
+require 'pry'
 class Banjos
   attr_accessor :name, :price, :description
 
@@ -16,5 +17,12 @@ class Banjos
     elsif gets.strip.downcase == "exit"
       exit
     end
+  end
+
+  def catelog
+    puts "Enter banjo number for more detailed description:"
+    puts "1. Stelling Staghorn With Old Wood Rim and Case - $6,250"
+    puts "2. Stelling Master Flower (1995) -$3,600"
+    puts "...etc."
   end
 end
