@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/banjos.rb"
+require_relative "../lib/cli.rb"
+
+Banjos.new("hello", "hello", "hello").start
