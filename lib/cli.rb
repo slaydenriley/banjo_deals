@@ -33,7 +33,7 @@ class Cli
   def display_banjos
     Banjos.all.each.with_index do |banjo, index|
       if Banjos.sold_out?
-        puts "#{index + 1}. #{banjo.name} - #{banjo.price} - SOLD OUT".colorize(:backgroud = red)
+        puts "#{index + 1}. #{banjo.name} - #{banjo.price} - SOLD OUT".colorize(:backgroud => red)
       else
         puts "#{index + 1}. #{banjo.name} - #{banjo.price}"
       end
