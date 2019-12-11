@@ -24,7 +24,8 @@ class Scraper
   end
 
   def self.scrape_info_page(link)
-    info = Nokogiri::HTML(open(link))
+    info = Nokogiri::HTML(open("https://www.elderly.com/collections/stelling/products/stelling-staghorn-with-old-wood-rim-case-2"))
+    binding.pry
   end
 
   def self.all

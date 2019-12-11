@@ -7,17 +7,16 @@ class Cli
 
   def run
     start
-    create_banjos
-    display_banjos
-    more_info
   end
 
   def start
     Scraper.scrape_catelog_page
     puts "Hello, welcome to the banjo deals catelog!"
-    puts "Type 'Enter' to view the catelog. Type 'Exit' to leave."
+    puts "Type 'Enter' to view the catelog."
+    puts "Type 'Exit' to leave."
 
     if gets.strip.downcase == "enter"
+      create_banjos
       display_banjos
     elsif gets.strip.downcase == "exit"
       self.exit
@@ -38,6 +37,9 @@ class Cli
         puts "#{index + 1}. #{banjo.name} - #{banjo.price}"
       end
     end
+    puts ""
+    puts "Please enter the banjo number for more information, or type 'exit' to leave:"
+    input = gets.strip
   end
 
   def more_info
