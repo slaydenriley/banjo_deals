@@ -31,5 +31,4 @@ class Scraper
   def self.all
     @@all
   end
-
 end

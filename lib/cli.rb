@@ -6,12 +6,12 @@ require 'colorize'
 class Cli
 
   def start
-    Scraper.scrape_catelog_page
     puts "Hello, welcome to the banjo deals catelog!"
     puts "Type 'Enter' to view the catelog."
     puts "Type 'Exit' to leave."
 
     if gets.strip.downcase == "enter"
+      puts "Loading...".colorize(:red)
       create_banjos
       display_banjos
     elsif gets.strip.downcase == "exit"
@@ -22,10 +22,13 @@ class Cli
   end
 
   def create_banjos
+    Scraper.scrape_catelog_page
     Banjos.create_from_catelog(Scraper.all)
   end
 
   def display_banjos
+    puts ""
+    puts "STELLING BANJO CATELOG".colorize(:green).underline
     Banjos.all.each.with_index do |banjo, index|
       if banjo.sold_out?
         puts "#{index + 1}. #{banjo.name} - #{banjo.price}" + " - SOLD OUT".colorize(:red)
@@ -35,7 +38,6 @@ class Cli
     end
     puts ""
     puts "Please enter the banjo number for more information, or type 'exit' to leave:"
-
     input = gets.strip
     if input == "exit".downcase
       self.exit
@@ -43,23 +45,30 @@ class Cli
       puts "Loading..."
       info_page_display(input)
     end
+    second_menu
+  end
+
+  def second_menu
     puts ""
-    puts "Enter another banjo number:"
     puts "Type 'catelog' to view the catelog again:"
     puts "Type 'exit' to exit"
     input = gets.strip
-    if input.to_i.class == Integer
-      info_page_display(input)
-    elsif input.downcase == "catelog"
+    if input.downcase == "catelog"
       display_banjos
     elsif input.downcase == "exit"
       self.exit
+    else
+      puts "Not sure what you mean! Please make a valid entry"
+      second_menu
     end
   end
 
   def info_page_display(input)
-    puts "#{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:red)
+    puts "#{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green).underline
     puts "#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}"
-    puts "#{Banjos.all[input.to_i - 1].link}"
+    puts "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
+  end
+
+  def self.exit
   end
 end
