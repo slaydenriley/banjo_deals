@@ -6,7 +6,7 @@ class Banjos
 
   @@all = []
 
-  def initialize(name, price, link, description = nil)
+  def initialize(name, price, link)
     @name = name
     @price = price
     @link = link
@@ -14,11 +14,13 @@ class Banjos
     @@all << self
   end
 
-  def self.create_from_catelog
-    Scraper.all.each do |hash|
-      Banjos.new(hash)
+  def self.create_from_catelog(array)
+    array.each do |hash|
+      Banjos.new(hash[:name], hash[:price], hash[:link])
     end
-    binding.pry
+  end
+
+  def sold_out?
   end
 
   def self.all

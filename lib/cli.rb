@@ -27,12 +27,16 @@ class Cli
   end
 
   def create_banjos
-    Banjos.create_from_catelog
+    Banjos.create_from_catelog(Scraper.all)
   end
 
   def display_banjos
     Banjos.all.each.with_index do |banjo, index|
-      puts " #{index}. #{name} - #{price}"
+      if Banjos.sold_out?
+        puts "#{index + 1}. #{banjo.name} - #{banjo.price} - SOLD OUT".colorize(:backgroud = red)
+      else
+        puts "#{index + 1}. #{banjo.name} - #{banjo.price}"
+      end
     end
   end
 
