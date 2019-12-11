@@ -39,12 +39,17 @@ class Cli
     end
     puts ""
     puts "Please enter the banjo number for more information, or type 'exit' to leave:"
-    more_info_display
-  end
 
-  def more_info_display
-    Banjos.all.each do |banjo|
-      Scraper.scrape_info_page(banjo.link)
+    input = gets.strip
+    if input == "exit".downcase
+      self.exit
+    else
+      puts "#{Banjos.all[input.to_i - 1].name}".colorize(:red)
+      puts "#{Banjos.all[input.to_i - 1].description}"
     end
+    puts "Enter another banjo number: or"
+    puts "Type 'catelog' to view the catelog again: or"
+    puts "Type 'exit' to exit"
+    gets.strip
   end
 end
