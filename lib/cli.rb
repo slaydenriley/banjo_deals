@@ -20,7 +20,7 @@ class Cli
     if gets.strip.downcase == "enter"
       display_banjos
     elsif gets.strip.downcase == "exit"
-      exit
+      self.exit
     else
       puts "Not sure what you mean!"
     end
