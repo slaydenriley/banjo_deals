@@ -44,12 +44,17 @@ class Cli
     if input == "exit".downcase
       self.exit
     else
-      puts "#{Banjos.all[input.to_i - 1].name}".colorize(:red)
-      puts "#{Banjos.all[input.to_i - 1].description}"
+      puts "Loading..."
+      info_page_display(input)
     end
-    puts "Enter another banjo number: or"
-    puts "Type 'catelog' to view the catelog again: or"
+    puts ""
+    puts "Enter another banjo number:"
+    puts "Type 'catelog' to view the catelog again:"
     puts "Type 'exit' to exit"
     gets.strip
+  end
+
+  def info_page_display(input)
+    puts "#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}"
   end
 end
