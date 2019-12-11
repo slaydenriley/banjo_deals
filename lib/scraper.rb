@@ -4,13 +4,14 @@ require 'pry'
 
 class Scraper
   def self.scrape_catelog_page
-    catelog = Nokogiri::HTML(open("https://www.elderly.com/collections/stelling"))
+    html = "https://www.elderly.com/collections/stelling"
+    catelog = Nokogiri::HTML(open(html))
     banjos = []
     catelog.css("div.ProductItem").each do |banjo|
-      binding.pry
       name = banjo.css("h2").text.strip
       price = banjo.css("span").text.strip
-      #link = ?
+      link = html + banjo.css("a").map{|link| link['href']}[0]
+      binding.pry
     end
   end
 
