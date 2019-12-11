@@ -5,13 +5,20 @@ require 'colorize'
 
 class Cli
 
+  def run
+    start
+    create_banjos
+    display_banjos
+    more_info
+  end
+
   def start
     Scraper.scrape_catelog_page
     puts "Hello, welcome to the banjo deals catelog!"
     puts "Type 'Enter' to view the catelog. Type 'Exit' to leave."
 
     if gets.strip.downcase == "enter"
-      self.catelog
+      display_banjos
     elsif gets.strip.downcase == "exit"
       exit
     else
@@ -19,10 +26,16 @@ class Cli
     end
   end
 
-  def catelog
-    puts "Enter banjo number for more detailed description:"
-    puts "1. Stelling Staghorn With Old Wood Rim and Case - $6,250"
-    puts "2. Stelling Master Flower (1995) -$3,600"
-    puts "...etc."
+  def create_banjos
+    Banjos.create_from_catelog
+  end
+
+  def display_banjos
+    Banjos.all.each.with_index do |banjo, index|
+      puts " #{index}. #{name} - #{price}"
+    end
+  end
+
+  def more_info
   end
 end
