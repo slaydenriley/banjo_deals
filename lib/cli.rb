@@ -5,10 +5,6 @@ require 'colorize'
 
 class Cli
 
-  def run
-    start
-  end
-
   def start
     Scraper.scrape_catelog_page
     puts "Hello, welcome to the banjo deals catelog!"
@@ -51,10 +47,19 @@ class Cli
     puts "Enter another banjo number:"
     puts "Type 'catelog' to view the catelog again:"
     puts "Type 'exit' to exit"
-    gets.strip
+    input = gets.strip
+    if input.to_i.class == Integer
+      info_page_display(input)
+    elsif input.downcase == "catelog"
+      display_banjos
+    elsif input.downcase == "exit"
+      self.exit
+    end
   end
 
   def info_page_display(input)
+    puts "#{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:red)
     puts "#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}"
+    puts "#{Banjos.all[input.to_i - 1].link}"
   end
 end

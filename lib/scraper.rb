@@ -19,9 +19,6 @@ class Scraper
         price = banjo.css("span").text.strip
       end
       link = "https://www.elderly.com" + banjo.css("a").map{|link| link['href']}[0]
-
-      #info = Nokogiri::HTML(open(link))
-      #description = info.css("div.ProductMeta__Description.Rte").text.strip
       @@all << {name: name, price: price, link: link, sold_out: sold_out}
     end
   end
