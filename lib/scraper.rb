@@ -13,7 +13,7 @@ class Scraper
       name = banjo.css("h2").text.strip
       if banjo.css("span").text.strip.include?("Sold out")
         sold_out = "Yes"
-        price = banjo.css("span").text.strip.split("$").pop.to_s
+        price = "$" + banjo.css("span").text.strip.split("$").pop.to_s
       else
         sold_out = "No"
         price = banjo.css("span").text.strip

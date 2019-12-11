@@ -21,7 +21,7 @@ class Banjos
     end
   end
 
-  def self.sold_out?
+  def sold_out?
     if @sold_out == "Yes"
       return true
     elsif @sold_out == "No"
