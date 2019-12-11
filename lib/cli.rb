@@ -40,7 +40,6 @@ class Cli
     puts ""
     puts "Please enter the banjo number for more information, or type 'exit' to leave:"
     more_info_display
-    input = gets.strip
   end
 
   def more_info_display
