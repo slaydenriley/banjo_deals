@@ -1,5 +1,8 @@
 require_relative "../lib/scraper.rb"
+require_relative "../lib/banjos.rb"
 require 'pry'
+require 'colorize'
+
 class Cli
 
   def start
@@ -11,6 +14,8 @@ class Cli
       self.catelog
     elsif gets.strip.downcase == "exit"
       exit
+    else
+      puts "Not sure what you mean!"
     end
   end
 
