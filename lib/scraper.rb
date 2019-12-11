@@ -6,9 +6,11 @@ class Scraper
   def self.scrape_catelog_page
     catelog = Nokogiri::HTML(open("https://www.elderly.com/collections/stelling"))
     banjos = []
-    catelog.css("div.ProductItem h2").each do |banjo|
-      name = banjo.text.strip
+    catelog.css("div.ProductItem").each do |banjo|
       binding.pry
+      name = banjo.css("h2").text.strip
+      price = banjo.css("span").text.strip
+      #link = ?
     end
   end
 

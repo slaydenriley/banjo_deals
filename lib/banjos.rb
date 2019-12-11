@@ -1,6 +1,6 @@
 require 'pry'
 class Banjos
-  attr_accessor :name, :price, :description
+  attr_accessor :name, :price, :link, :description
 
   @@all = []
 
