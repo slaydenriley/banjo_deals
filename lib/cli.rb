@@ -39,9 +39,13 @@ class Cli
     end
     puts ""
     puts "Please enter the banjo number for more information, or type 'exit' to leave:"
+    more_info_display
     input = gets.strip
   end
 
-  def more_info
+  def more_info_display
+    Banjos.all.each do |banjo|
+      Scraper.scrape_info_page(banjo.link)
+    end
   end
 end
