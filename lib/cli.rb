@@ -28,19 +28,16 @@ class Cli
     puts "    -Press 'Enter' to view the catelog".colorize(:green)
     puts "    -Type 'Exit' to leave".colorize(:red)
     puts "    ══════════════════════════════════"
-    puts ""
 
     input = gets.strip.downcase
     case input
     when ""
-      puts ""
       puts "    Loading...".colorize(:red)
       create_banjos
       display_banjos
     when "exit"
       exit_out
     else
-      puts ""
       puts "    Please make a valid entry".colorize(:red)
       puts ""
       first_menu
