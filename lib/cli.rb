@@ -77,6 +77,7 @@ class Cli
     puts "    -Enter a banjo number for more information".colorize(:green)
     puts "    -Type 'Exit' to exit".colorize(:red)
     puts "    ══════════════════════════════════════════"
+    
     input = gets.strip
     if input.downcase == "exit"
       exit_out
@@ -107,8 +108,8 @@ class Cli
     puts "        █ #{formatted_description}"
     puts ""
     if Banjos.all[input].sold_out?
-      puts "        █ SORRY! This banjo is SOLD OUT! Let's check Google instead...".colorize(:red)
-      puts "        ==> https://www.google.com/search?q=#{name.downcase.split(" ").join("-")}".colorize(:blue)
+      puts "        █ SORRY! This banjo is SOLD OUT from elderly.com! Let's check Google instead...".colorize(:red)
+      puts "        ==> https://www.google.com/search?q=#{name.downcase.gsub(" ", "-")}".colorize(:blue)
     else
       puts "        █ Interested in buying? Go here:"
       puts "        ==> #{link}".colorize(:blue)
