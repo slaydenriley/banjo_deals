@@ -94,26 +94,23 @@ class Cli
   def info_page_display(input)
     input = input.to_i - 1
 
-    description = Scraper.scrape_info_page(Banjos.all[input].link)
+    link = Banjos.all[input].link
+    description = Scraper.scrape_info_page(link)
     formatted_description = add_newlines(description, 68)
     name = Banjos.all[input].name
     price = Banjos.all[input].price
-    link = Banjos.all[input].link
 
     puts ""
-    puts "        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄".colorize(:green)
+
     puts ""
-    puts "        #{name} - #{price}".colorize(:green)
+    puts "        █ #{name.upcase} - #{price}".colorize(:green)
     puts ""
-    puts "        #{formatted_description}"
+    puts "        █ #{formatted_description}"
     puts ""
-    puts "        Interested in buying? Go here:"
-    puts "        #{link}".colorize(:blue)
+    puts "        █ Interested in buying? Go here:"
+    puts "        ==> #{link}".colorize(:blue)
     puts ""
-    if Banjos.all[input].sold_out?
-      puts "        SORRY! This banjo is SOLD OUT!".colorize(:red)
-    end
-    puts "        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄".colorize(:green)
+    puts "        █ SORRY! This banjo is SOLD OUT!".colorize(:red) if Banjos.all[input].sold_out?
     third_menu
   end
 
