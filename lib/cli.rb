@@ -6,6 +6,11 @@ require 'colorize'
 class Cli
 
   def start
+    puts ".▄▄ · ▄▄▄▄▄▄▄▄ .▄▄▌  ▄▄▌  ▪   ▐ ▄  ▄▄ •     ▄▄▄▄·  ▄▄▄·  ▐ ▄  ▐▄▄▄      .▄▄ · ".colorize(:blue)
+    puts "▐█ ▀. •██  ▀▄.▀·██•  ██•  ██ •█▌▐█▐█ ▀ ▪    ▐█ ▀█▪▐█ ▀█ •█▌▐█  ·██▪     ▐█ ▀. ".colorize(:blue)
+    puts "▄▀▀▀█▄ ▐█.▪▐▀▀▪▄██▪  ██▪  ▐█·▐█▐▐▌▄█ ▀█▄    ▐█▀▀█▄▄█▀▀█ ▐█▐▐▌▪▄ ██ ▄█▀▄ ▄▀▀▀█▄".colorize(:blue)
+    puts "▐█▄▪▐█ ▐█▌·▐█▄▄▌▐█▌▐▌▐█▌▐▌▐█▌██▐█▌▐█▄▪▐█    ██▄▪▐█▐█ ▪▐▌██▐█▌▐▌▐█▌▐█▌.▐▌▐█▄▪▐█".colorize(:blue)
+    puts "▀▀▀▀  ▀▀▀  ▀▀▀ .▀▀▀ .▀▀▀ ▀▀▀▀▀ █▪·▀▀▀▀     ·▀▀▀▀  ▀  ▀ ▀▀ █▪ ▀▀▀• ▀█▄▀▪ ▀▀▀▀  ".colorize(:blue)
     puts "Hello, welcome to the banjo deals catelog!"
     puts "Type 'Enter' to view the catelog."
     puts "Type 'Exit' to leave."
@@ -28,7 +33,7 @@ class Cli
 
   def display_banjos
     puts ""
-    puts "STELLING BANJO CATELOG".colorize(:green).underline
+    puts "--- STELLING BANJO CATELOG ---".colorize(:green)
     Banjos.all.each.with_index do |banjo, index|
       if banjo.sold_out?
         puts "#{index + 1}. #{banjo.name} - #{banjo.price}" + " - SOLD OUT".colorize(:red)
@@ -36,13 +41,16 @@ class Cli
         puts "#{index + 1}. #{banjo.name} - #{banjo.price}"
       end
     end
+
     puts ""
     puts "Please enter the banjo number for more information, or type 'exit' to leave:"
     input = gets.strip
     if input == "exit".downcase
       self.exit
     else
+      puts ""
       puts "Loading..."
+      puts ""
       info_page_display(input)
     end
     second_menu
@@ -55,10 +63,12 @@ class Cli
     input = gets.strip
     if input.downcase == "catelog"
       display_banjos
+      second_menu
     elsif input.downcase == "exit"
       self.exit
     else
-      puts "Not sure what you mean! Please make a valid entry"
+      puts ""
+      puts "Not sure what you mean! Please make a valid entry...".colorize(:red)
       second_menu
     end
   end

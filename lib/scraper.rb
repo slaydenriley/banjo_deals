@@ -5,10 +5,10 @@ require 'pry'
 class Scraper
 
   @@all = []
+  LINK = "https://www.elderly.com/collections/stelling"
 
   def self.scrape_catelog_page
-    html = "https://www.elderly.com/collections/stelling"
-    catelog = Nokogiri::HTML(open(html))
+    catelog = Nokogiri::HTML(open(LINK))
     catelog.css("div.ProductItem").each do |banjo|
       name = banjo.css("h2").text.strip
       if banjo.css("span").text.strip.include?("Sold out")
