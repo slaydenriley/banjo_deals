@@ -23,14 +23,14 @@ class Cli
     puts ""
     puts "    MENU"
     puts "    ══════════════════════════════════"
-    puts "    -Type 'Enter' to view the catelog".colorize(:green)
+    puts "    -Press 'Enter' to view the catelog".colorize(:green)
     puts "    -Type 'Exit' to leave".colorize(:red)
     puts "    ══════════════════════════════════"
     puts ""
 
     input = gets.strip.downcase
     case input
-    when "enter"
+    when ""
       puts ""
       puts "    Loading...".colorize(:red)
       create_banjos
@@ -115,7 +115,6 @@ class Cli
   end
 
   def third_menu
-    puts ""
     puts ""
     puts "    MENU"
     puts "    ══════════════════════════════════════════"
