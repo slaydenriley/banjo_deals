@@ -5,19 +5,7 @@ require 'colorize'
 
 class Cli
 
-  #def run
-  #  start
-  #  first_menu
-  #  create_banjos
-  #  display_banjos
-  #  second_menu
-  #  info_page_display
-  #  third_menu
-  #  exit_out
-  #end
-
   def start
-    binding.pry
     puts ""
     puts "    ██████╗  █████╗ ███╗   ██╗     ██╗ ██████╗ ███████╗██╗".colorize(:green)
     puts "    ██╔══██╗██╔══██╗████╗  ██║     ██║██╔═══██╗██╔════╝██║".colorize(:green)
@@ -116,6 +104,9 @@ class Cli
     puts "        Interested in buying? Go here:"
     puts "        #{link}".colorize(:blue)
     puts ""
+    if Banjos.all[input.to_i - 1].sold_out?
+      puts "        SORRY! This banjo is SOLD OUT!".colorize(:red)
+    end
     puts "        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄".colorize(:green)
     third_menu
   end
