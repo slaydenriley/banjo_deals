@@ -1,17 +1,18 @@
-HELLO WORLD
-
 # StellingBanjos
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/banjo_deals`. To experiment with that code, run `bin/console` for an interactive prompt.
+The StellingBanjos gem provides the user with a list of Stelling Banjos (the best banjos) for sale
+from the website https://www.elderly.com using a CLI. The catelog displays each banjo name, the price,
+and whether or not it is in stock.
 
-TODO: Delete this and the text above, and describe your gem
+The user can then make a specific banjo selection to view more information about a banjo and can follow
+a link to the specific banjo webpage.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'steling_banjos'
+gem 'stelling_banjos'
 ```
 
 And then execute:
