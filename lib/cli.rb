@@ -32,10 +32,12 @@ class Cli
 
   def first_menu
     puts ""
+    puts "    ══════════════════════════════════"
     puts "    -Type 'Enter' to view the catelog.".colorize(:green)
     puts "    -Type 'Exit' to leave.".colorize(:red)
+    puts "    ══════════════════════════════════"
     puts ""
-    
+
     input = gets.strip.downcase
     case input
     when "enter"
@@ -76,14 +78,14 @@ class Cli
         puts "    #{index + 1}. #{banjo.name} - #{banjo.price}"
       end
     end
-    puts ""
-    puts "    ████████████████████████████████████████████████████████████████████████████".colorize(:green)
-    puts ""
     second_menu
   end
 
   def second_menu
+    puts ""
+    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
     puts "    Please enter the banjo number for more information, or type 'exit' to leave:"
+    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
     puts ""
     input = gets.strip
     if input.downcase == "exit"
@@ -102,34 +104,34 @@ class Cli
 
   def info_page_display(input)
     description = Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)
+    link = Banjos.all[input.to_i - 1].link
     puts ""
     puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
-    puts ""
     puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
     puts ""
     puts "    #{add_newlines("#{description}", 68)}"
     puts ""
     puts "    Interested in buying? Go here:"
-    puts "    " + "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
-    puts ""
+    puts "    #{link}".colorize(:blue)
     puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
     third_menu
   end
 
   def third_menu
     puts ""
-    puts "    Type 'catelog' to view the catelog again:".colorize(:green)
-    puts "    Type 'exit' to exit".colorize(:red)
+    puts "    Type 'Catelog' to view the catelog again:".colorize(:green)
+    puts "    Type 'Exit' to exit".colorize(:red)
     puts ""
 
-    input = gets.strip
-    if input.downcase == "catelog"
+    input = gets.strip.downcase
+    case input
+    when "catelog"
       display_banjos
-    elsif input.downcase == "exit"
+    when "exit"
       exit_out
     else
       puts ""
-      puts "    Not sure what you mean! Please make a valid entry...".colorize(:red)
+      puts "    Please make a valid entry...".colorize(:red)
       third_menu
     end
   end
@@ -145,7 +147,7 @@ class Cli
         current_line = ''
       end
     end
-    lines.push(current_line).join("\n   ")
+    lines.push(current_line).join("\n   ").lstrip
   end
 
   def exit_out
