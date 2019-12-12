@@ -5,6 +5,8 @@ require 'colorize'
 
 class Cli
 
+  LINK = "https://www.elderly.com/collections/stelling"
+
   def start
     puts ""
     puts "    ██████╗  █████╗ ███╗   ██╗     ██╗ ██████╗ ███████╗██╗".colorize(:green)
@@ -46,7 +48,7 @@ class Cli
   end
 
   def create_banjos
-    Scraper.scrape_catelog_page
+    Scraper.scrape_catelog_page(LINK)
     Banjos.create_from_catelog(Scraper.all)
   end
 

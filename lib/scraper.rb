@@ -5,14 +5,15 @@ require 'pry'
 class Scraper
 
   @@all = []
-  LINK = "https://www.elderly.com/collections/stelling"
 
-  def self.scrape_catelog_page
-    catelog = Nokogiri::HTML(open(LINK))
+  def self.scrape_catelog_page(link)
+    catelog = Nokogiri::HTML(open(link))
     catelog.css("div.ProductItem").each do |banjo|
       name = banjo.css("h2").text.strip
       if banjo.css("span").text.strip.include?("Sold out")
         sold_out = "Yes"
+
+        #This removes "Sold out" from the end of each price
         price = "$" + banjo.css("span").text.strip.split("$").pop.to_s
       else
         sold_out = "No"
@@ -26,6 +27,7 @@ class Scraper
   def self.scrape_info_page(link)
     info = Nokogiri::HTML(open(link))
     info.css("div.ProductMeta__Description.Rte").text.strip.split("More").shift.to_s.strip
+      #This was the only way I found to remove the "More Details..." at the end of each description
   end
 
   def self.all
