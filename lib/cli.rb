@@ -103,22 +103,23 @@ class Cli
   end
 
   def add_newlines(string, max_length)
-    index = max_length - 1
-    until index >= string.length
-      if string[index] == ' '
-        string[index] = "\n"
-        index += max_length
-      else
-        index += 1
+    words = string.split(' ')
+    lines = []
+    current_line = ''
+    until words.empty?
+      current_line += " #{words.shift}"
+      if current_line.length >= max_length
+        lines << current_line
+        current_line = ''
       end
     end
-    string
+    lines.push(current_line).join("\n   ")
   end
 
   def info_page_display(input)
     puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
     puts ""
-    puts "    #{add_newlines("#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}", 200)}"
+    puts "    #{add_newlines("#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}", 75)}"
     puts ""
     puts "    Interested in buying? Go here:"
     puts "    " + "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
@@ -127,7 +128,7 @@ class Cli
   end
 
   def exit_out
-
+    puts ""
     puts "    ██████╗  ██████╗  ██████╗ ██████╗ ██████╗ ██╗   ██╗███████╗██╗ ".colorize(:red)
     puts "    ██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██║".colorize(:red)
     puts "    ██║  ███╗██║   ██║██║   ██║██║  ██║██████╔╝ ╚████╔╝ █████╗  ██║".colorize(:red)
