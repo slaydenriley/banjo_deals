@@ -5,6 +5,17 @@ require 'colorize'
 
 class Cli
 
+  #def run
+  #  start
+  #  first_menu
+  #  create_banjos
+  #  display_banjos
+  #  second_menu
+  #  info_page_display
+  #  third_menu
+  #  exit_out
+  #end
+
   def start
     puts ""
     puts "    ███████╗████████╗███████╗██╗     ██╗     ██╗███╗   ██╗ ██████╗     ██████╗  █████╗ ███╗   ██╗     ██╗ ██████╗ ███████╗".colorize(:green)
@@ -24,6 +35,7 @@ class Cli
     puts "    -Type 'Enter' to view the catelog.".colorize(:green)
     puts "    -Type 'Exit' to leave.".colorize(:red)
     puts ""
+    
     input = gets.strip.downcase
     case input
     when "enter"
@@ -56,6 +68,7 @@ class Cli
     puts "    ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝ ╚═════╝  ╚═════╝  ".colorize(:green)
     puts "    ███████████████████████████████████████████████████████████".colorize(:green)
     puts ""
+
     Banjos.all.each.with_index do |banjo, index|
       if banjo.sold_out?
         puts "    #{index + 1}. #{banjo.name} - #{banjo.price}" + " - SOLD OUT".colorize(:red)
@@ -63,11 +76,13 @@ class Cli
         puts "    #{index + 1}. #{banjo.name} - #{banjo.price}"
       end
     end
+    puts ""
+    puts "    ████████████████████████████████████████████████████████████████████████████".colorize(:green)
+    puts ""
     second_menu
   end
 
   def second_menu
-    puts ""
     puts "    Please enter the banjo number for more information, or type 'exit' to leave:"
     puts ""
     input = gets.strip
@@ -75,7 +90,7 @@ class Cli
       exit_out
     elsif input.to_i.between?(1, Banjos.all.length)
       puts ""
-      puts "    Loading..."
+      puts "    Loading...".colorize(:red)
       puts ""
       info_page_display(input)
     else
@@ -85,11 +100,28 @@ class Cli
     end
   end
 
+  def info_page_display(input)
+    description = Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)
+    puts ""
+    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
+    puts ""
+    puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
+    puts ""
+    puts "    #{add_newlines("#{description}", 68)}"
+    puts ""
+    puts "    Interested in buying? Go here:"
+    puts "    " + "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
+    puts ""
+    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
+    third_menu
+  end
+
   def third_menu
     puts ""
-    puts "    Type 'catelog' to view the catelog again:"
-    puts "    Type 'exit' to exit"
+    puts "    Type 'catelog' to view the catelog again:".colorize(:green)
+    puts "    Type 'exit' to exit".colorize(:red)
     puts ""
+
     input = gets.strip
     if input.downcase == "catelog"
       display_banjos
@@ -114,17 +146,6 @@ class Cli
       end
     end
     lines.push(current_line).join("\n   ")
-  end
-
-  def info_page_display(input)
-    puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
-    puts ""
-    puts "    #{add_newlines("#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}", 75)}"
-    puts ""
-    puts "    Interested in buying? Go here:"
-    puts "    " + "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
-    puts ""
-    third_menu
   end
 
   def exit_out
