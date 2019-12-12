@@ -25,7 +25,8 @@ class Scraper
 
   def self.scrape_info_page(link)
     info = Nokogiri::HTML(open(link))
-    info.css("div.ProductMeta__Description.Rte").text.strip
+    binding.pry
+    info.css("div.ProductMeta__Description.Rte").text.strip.split("More").shift.to_s.strip
   end
 
   def self.all
