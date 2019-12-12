@@ -106,10 +106,14 @@ class Cli
     puts ""
     puts "        █ #{formatted_description}"
     puts ""
-    puts "        █ Interested in buying? Go here:"
-    puts "        ==> #{link}".colorize(:blue)
+    if Banjos.all[input].sold_out?
+      puts "        █ SORRY! This banjo is SOLD OUT! Let's check Google instead...".colorize(:red)
+      puts "        ==> https://www.google.com/search?q=#{name.downcase.split(" ").join("-")}".colorize(:blue)
+    else
+      puts "        █ Interested in buying? Go here:"
+      puts "        ==> #{link}".colorize(:blue)
+    end
     puts ""
-    puts "        █ SORRY! This banjo is SOLD OUT!".colorize(:red) if Banjos.all[input].sold_out?
     third_menu
   end
 
