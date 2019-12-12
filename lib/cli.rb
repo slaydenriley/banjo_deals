@@ -17,14 +17,15 @@ class Cli
   #end
 
   def start
+    binding.pry
     puts ""
-    puts "    ███████╗████████╗███████╗██╗     ██╗     ██╗███╗   ██╗ ██████╗     ██████╗  █████╗ ███╗   ██╗     ██╗ ██████╗ ███████╗".colorize(:green)
-    puts "    ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██║████╗  ██║██╔════╝     ██╔══██╗██╔══██╗████╗  ██║     ██║██╔═══██╗██╔════╝".colorize(:green)
-    puts "    ███████╗   ██║   █████╗  ██║     ██║     ██║██╔██╗ ██║██║  ███╗    ██████╔╝███████║██╔██╗ ██║     ██║██║   ██║███████╗".colorize(:green)
-    puts "    ╚════██║   ██║   ██╔══╝  ██║     ██║     ██║██║╚██╗██║██║   ██║    ██╔══██╗██╔══██║██║╚██╗██║██   ██║██║   ██║╚════██║".colorize(:green)
-    puts "    ███████║   ██║   ███████╗███████╗███████╗██║██║ ╚████║╚██████╔╝    ██████╔╝██║  ██║██║ ╚████║╚█████╔╝╚██████╔╝███████║".colorize(:green)
-    puts "    ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚══════╝".colorize(:green)
-    puts "    ██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████".colorize(:green)
+    puts "    ██████╗  █████╗ ███╗   ██╗     ██╗ ██████╗ ███████╗██╗".colorize(:green)
+    puts "    ██╔══██╗██╔══██╗████╗  ██║     ██║██╔═══██╗██╔════╝██║".colorize(:green)
+    puts "    ██████╔╝███████║██╔██╗ ██║     ██║██║   ██║███████╗██║".colorize(:green)
+    puts "    ██╔══██╗██╔══██║██║╚██╗██║██   ██║██║   ██║╚════██║╚═╝".colorize(:green)
+    puts "    ██████╔╝██║  ██║██║ ╚████║╚█████╔╝╚██████╔╝███████║██╗".colorize(:green)
+    puts "    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚══════╝╚═╝".colorize(:green)
+    puts "    ██████████████████████████████████████████████████████".colorize(:green)
     puts ""
     puts "    Hello! Welcome to the Stelling Banjos catelog! The best banjos in the world!"
     first_menu
@@ -32,9 +33,10 @@ class Cli
 
   def first_menu
     puts ""
+    puts "    MENU"
     puts "    ══════════════════════════════════"
-    puts "    -Type 'Enter' to view the catelog.".colorize(:green)
-    puts "    -Type 'Exit' to leave.".colorize(:red)
+    puts "    -Type 'Enter' to view the catelog".colorize(:green)
+    puts "    -Type 'Exit' to leave".colorize(:red)
     puts "    ══════════════════════════════════"
     puts ""
 
@@ -83,17 +85,16 @@ class Cli
 
   def second_menu
     puts ""
-    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
-    puts "    Please enter the banjo number for more information, or type 'exit' to leave:"
-    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
-    puts ""
+    puts "    MENU"
+    puts "    ══════════════════════════════════════════"
+    puts "    -Enter a banjo number for more information".colorize(:green)
+    puts "    -Type 'Exit' to exit".colorize(:red)
+    puts "    ══════════════════════════════════════════"
     input = gets.strip
     if input.downcase == "exit"
       exit_out
     elsif input.to_i.between?(1, Banjos.all.length)
-      puts ""
       puts "    Loading...".colorize(:red)
-      puts ""
       info_page_display(input)
     else
       puts ""
@@ -106,32 +107,41 @@ class Cli
     description = Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)
     link = Banjos.all[input.to_i - 1].link
     puts ""
-    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
-    puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
+    puts "        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄".colorize(:green)
     puts ""
-    puts "    #{add_newlines("#{description}", 68)}"
+    puts "        #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
     puts ""
-    puts "    Interested in buying? Go here:"
-    puts "    #{link}".colorize(:blue)
-    puts "    ════════════════════════════════════════════════════════════════════════════".colorize(:green)
+    puts "        #{add_newlines("#{description}", 68)}"
+    puts ""
+    puts "        Interested in buying? Go here:"
+    puts "        #{link}".colorize(:blue)
+    puts ""
+    puts "        ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄".colorize(:green)
     third_menu
   end
 
   def third_menu
     puts ""
-    puts "    Type 'Catelog' to view the catelog again:".colorize(:green)
-    puts "    Type 'Exit' to exit".colorize(:red)
+    puts ""
+    puts "    MENU"
+    puts "    ══════════════════════════════════════════"
+    puts "    -Enter another banjo number".colorize(:green)
+    puts "    -Type 'Catelog' to view the catelog again".colorize(:green)
+    puts "    -Type 'Exit' to exit".colorize(:red)
+    puts "    ══════════════════════════════════════════"
     puts ""
 
-    input = gets.strip.downcase
-    case input
-    when "catelog"
-      display_banjos
-    when "exit"
+    input = gets.strip
+    if input.downcase == "exit"
       exit_out
+    elsif input.to_i.between?(1, Banjos.all.length)
+      puts "    Loading...".colorize(:red)
+      info_page_display(input)
+    elsif input.downcase == "catelog"
+      display_banjos
     else
       puts ""
-      puts "    Please make a valid entry...".colorize(:red)
+      puts "    Please make a valid entry".colorize(:red)
       third_menu
     end
   end
@@ -147,7 +157,7 @@ class Cli
         current_line = ''
       end
     end
-    lines.push(current_line).join("\n   ").lstrip
+    lines.push(current_line).join("\n       ").lstrip
   end
 
   def exit_out
