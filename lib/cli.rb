@@ -63,24 +63,33 @@ class Cli
         puts "    #{index + 1}. #{banjo.name} - #{banjo.price}"
       end
     end
-
-    puts ""
-    puts "    Please enter the banjo number for more information, or type 'exit' to leave:"
-    input = gets.strip
-    if input.downcase == "exit"
-      exit_out
-    else
-      puts ""
-      puts "    Loading..."
-      puts ""
-      info_page_display(input)
-    end
+    second_menu
   end
 
   def second_menu
     puts ""
+    puts "    Please enter the banjo number for more information, or type 'exit' to leave:"
+    puts ""
+    input = gets.strip
+    if input.downcase == "exit"
+      exit_out
+    elsif input.to_i.between?(1, Banjos.all.length)
+      puts ""
+      puts "    Loading..."
+      puts ""
+      info_page_display(input)
+    else
+      puts ""
+      puts "    Please make a valid entry".colorize(:red)
+      second_menu
+    end
+  end
+
+  def third_menu
+    puts ""
     puts "    Type 'catelog' to view the catelog again:"
     puts "    Type 'exit' to exit"
+    puts ""
     input = gets.strip
     if input.downcase == "catelog"
       display_banjos
@@ -89,19 +98,32 @@ class Cli
     else
       puts ""
       puts "    Not sure what you mean! Please make a valid entry...".colorize(:red)
-      second_menu
+      third_menu
     end
+  end
+
+  def add_newlines(string, max_length)
+    index = max_length - 1
+    until index >= string.length
+      if string[index] == ' '
+        string[index] = "\n"
+        index += max_length
+      else
+        index += 1
+      end
+    end
+    string
   end
 
   def info_page_display(input)
     puts "    #{Banjos.all[input.to_i - 1].name} - #{Banjos.all[input.to_i - 1].price}".colorize(:green)
-    puts "    ------------------------------"
-    puts "    #{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}"
-    puts "    ------------------------------"
+    puts ""
+    puts "    #{add_newlines("#{Scraper.scrape_info_page(Banjos.all[input.to_i - 1].link)}", 200)}"
+    puts ""
     puts "    Interested in buying? Go here:"
-    puts "    #{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
-    puts "    ------------------------------"
-    second_menu
+    puts "    " + "#{Banjos.all[input.to_i - 1].link}".colorize(:blue).underline
+    puts ""
+    third_menu
   end
 
   def exit_out
