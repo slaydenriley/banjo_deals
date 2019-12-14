@@ -102,7 +102,6 @@ class Cli
     price = Banjos.all[input].price
 
     puts ""
-
     puts ""
     puts "        █ #{name.upcase} - #{price}".colorize(:green)
     puts ""
