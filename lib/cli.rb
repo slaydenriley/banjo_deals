@@ -58,6 +58,7 @@ class Cli
     puts "    ╚██████╗██║  ██║   ██║   ███████╗███████╗╚██████╔╝╚██████╔╝".colorize(:green)
     puts "    ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝ ╚═════╝  ╚═════╝  ".colorize(:green)
     puts "    ███████████████████████████████████████████████████████████".colorize(:green)
+    puts "                   ~ Supplied by www.elderly.com ~".colorize(:red)
     puts ""
 
     Banjos.all.each.with_index do |banjo, index|
@@ -77,7 +78,7 @@ class Cli
     puts "    -Enter a banjo number for more information".colorize(:green)
     puts "    -Type 'Exit' to exit".colorize(:red)
     puts "    ══════════════════════════════════════════"
-    
+
     input = gets.strip
     if input.downcase == "exit"
       exit_out
