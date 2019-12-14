@@ -6,7 +6,7 @@ class Banjos
 
   @@all = []
 
-  def initialize(name, price, link, sold_out = nil)
+  def initialize(name, price, link, sold_out)
     @name = name
     @price = price
     @link = link
@@ -21,9 +21,10 @@ class Banjos
   end
 
   def sold_out?
-    if @sold_out == "Yes"
+    case @sold_out
+    when "Yes"
       return true
-    elsif @sold_out == "No"
+    when "No"
       return false
     else
       return false
