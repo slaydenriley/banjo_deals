@@ -1,8 +1,4 @@
-require 'open-uri'
-require 'nokogiri'
-require 'pry'
-
-class Scraper
+class StellingBanjos::Scraper
 
   @@all = []
 

@@ -1,9 +1,4 @@
-require_relative "../lib/scraper.rb"
-require_relative "../lib/banjos.rb"
-require 'pry'
-require 'colorize'
-
-class Cli
+class StellingBanjos::Cli
 
   LINK = "https://www.elderly.com/collections/stelling"
 
@@ -45,8 +40,8 @@ class Cli
   end
 
   def create_banjos
-    Scraper.scrape_catelog_page(LINK)
-    Banjos.create_from_catelog(Scraper.all)
+    StellingBanjos::Scraper.scrape_catelog_page(LINK)
+    StellingBanjos::Banjos.create_from_catelog(StellingBanjos::Scraper.all)
   end
 
   def display_banjos
@@ -61,7 +56,7 @@ class Cli
     puts "                   ~ Supplied by www.elderly.com ~".colorize(:red)
     puts ""
 
-    Banjos.all.each.with_index do |banjo, index|
+    StellingBanjos::Banjos.all.each.with_index do |banjo, index|
       if banjo.sold_out?
         puts "    #{index + 1}. #{banjo.name} - #{banjo.price}" + " - SOLD OUT".colorize(:red)
       else
@@ -82,7 +77,7 @@ class Cli
     input = gets.strip
     if input.downcase == "exit"
       exit_out
-    elsif input.to_i.between?(1, Banjos.all.length)
+    elsif input.to_i.between?(1, StellingBanjos::Banjos.all.length)
       puts "    Loading...".colorize(:red)
       info_page_display(input)
     else
@@ -95,11 +90,11 @@ class Cli
   def info_page_display(input)
     input = input.to_i - 1
 
-    link = Banjos.all[input].link
-    description = Scraper.scrape_info_page(link)
+    link = StellingBanjos::Banjos.all[input].link
+    description = StellingBanjos::Scraper.scrape_info_page(link)
     formatted_description = add_newlines(description, 68)
-    name = Banjos.all[input].name
-    price = Banjos.all[input].price
+    name = StellingBanjos::Banjos.all[input].name
+    price = StellingBanjos::Banjos.all[input].price
 
     puts ""
     puts ""
@@ -107,7 +102,7 @@ class Cli
     puts ""
     puts "        █ #{formatted_description}"
     puts ""
-    if Banjos.all[input].sold_out?
+    if StellingBanjos::Banjos.all[input].sold_out?
       puts "        █ SORRY! This banjo is SOLD OUT from elderly.com! Let's check Google instead...".colorize(:red)
       puts "        ==> https://www.google.com/search?q=#{name.downcase.gsub(" ", "-")}".colorize(:blue)
     else
@@ -131,7 +126,7 @@ class Cli
     input = gets.strip
     if input.downcase == "exit"
       exit_out
-    elsif input.to_i.between?(1, Banjos.all.length)
+    elsif input.to_i.between?(1, StellingBanjos::Banjos.all.length)
       puts "    Loading...".colorize(:red)
       info_page_display(input)
     elsif input.downcase == "catelog"
