@@ -25,7 +25,7 @@ Or install it yourself as:
 
 ## Usage
 
-Simply enter the CLI by running ruby bin/banjo and follow the on-screen instructions.
+Start the CLI by entering "banjo" into the terminal.
 
 ## Development
 
