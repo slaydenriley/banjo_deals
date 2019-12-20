@@ -1,7 +1,7 @@
 # StellingBanjos
 
 The StellingBanjos gem provides the user with a list of Stelling Banjos (the best banjos) for sale
-from the website https://www.elderly.com using a CLI. The catelog displays each banjo name, the price,
+from the website https://www.elderly.com using a CLI. The catalog displays each banjo name, the price,
 and whether or not it is in stock.
 
 The user can then make a specific banjo selection to view more information about a banjo and can follow
