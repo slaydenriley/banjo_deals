@@ -11,7 +11,7 @@ class StellingBanjos::Banjos
     @@all << self
   end
 
-  def self.create_from_catelog(array)
+  def self.create_from_catalog(array)
     array.each do |hash|
       self.new(hash[:name], hash[:price], hash[:link], hash[:sold_out])
     end

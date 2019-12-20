@@ -2,9 +2,9 @@ class StellingBanjos::Scraper
 
   @@all = []
 
-  def self.scrape_catelog_page(link)
-    catelog = Nokogiri::HTML(open(link))
-    catelog.css("div.ProductItem").each do |banjo|
+  def self.scrape_catalog_page(link)
+    catalog = Nokogiri::HTML(open(link))
+    catalog.css("div.ProductItem").each do |banjo|
       name = banjo.css("h2").text.strip
       if banjo.css("span").text.strip.include?("Sold out")
         sold_out = "Yes"

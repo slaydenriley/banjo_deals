@@ -12,7 +12,7 @@ class StellingBanjos::Cli
     puts "    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚══════╝╚═╝".colorize(:green)
     puts "    ██████████████████████████████████████████████████████".colorize(:green)
     puts ""
-    puts "    Hello! Welcome to the Stelling Banjos catelog! The best banjos in the world!"
+    puts "    Hello! Welcome to the Stelling Banjos catalog! The best banjos in the world!"
     first_menu
   end
 
@@ -20,7 +20,7 @@ class StellingBanjos::Cli
     puts ""
     puts "    MENU"
     puts "    ══════════════════════════════════"
-    puts "    -Press 'Enter' to view the catelog".colorize(:green)
+    puts "    -Press 'Enter' to view the catalog".colorize(:green)
     puts "    -Type 'Exit' to leave".colorize(:red)
     puts "    ══════════════════════════════════"
 
@@ -40,18 +40,18 @@ class StellingBanjos::Cli
   end
 
   def create_banjos
-    StellingBanjos::Scraper.scrape_catelog_page(LINK)
-    StellingBanjos::Banjos.create_from_catelog(StellingBanjos::Scraper.all)
+    StellingBanjos::Scraper.scrape_catalog_page(LINK)
+    StellingBanjos::Banjos.create_from_catalog(StellingBanjos::Scraper.all)
   end
 
   def display_banjos
     puts ""
-    puts "    ██████╗ █████╗ ████████╗███████╗██╗      ██████╗  ██████╗  ".colorize(:green)
-    puts "    ██╔════╝██╔══██╗╚══██╔══╝██╔════╝██║     ██╔═══██╗██╔════╝ ".colorize(:green)
-    puts "    ██║     ███████║   ██║   █████╗  ██║     ██║   ██║██║  ███╗".colorize(:green)
-    puts "    ██║     ██╔══██║   ██║   ██╔══╝  ██║     ██║   ██║██║   ██║".colorize(:green)
-    puts "    ╚██████╗██║  ██║   ██║   ███████╗███████╗╚██████╔╝╚██████╔╝".colorize(:green)
-    puts "    ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝ ╚═════╝  ╚═════╝  ".colorize(:green)
+    puts "    ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗  ".colorize(:green)
+    puts "    ██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝ ".colorize(:green)
+    puts "    ██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗".colorize(:green)
+    puts "    ██║     ██╔══██║   ██║   ██╔══██║██║     ██║   ██║██║   ██║".colorize(:green)
+    puts "    ╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝".colorize(:green)
+    puts "    ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝  ".colorize(:green)
     puts "    ███████████████████████████████████████████████████████████".colorize(:green)
     puts "                   ~ Supplied by www.elderly.com ~".colorize(:red)
     puts ""
@@ -118,7 +118,7 @@ class StellingBanjos::Cli
     puts "    MENU"
     puts "    ══════════════════════════════════════════"
     puts "    -Enter another banjo number".colorize(:green)
-    puts "    -Type 'Catelog' to view the catelog again".colorize(:green)
+    puts "    -Type 'Catalog' to view the catalog again".colorize(:green)
     puts "    -Type 'Exit' to exit".colorize(:red)
     puts "    ══════════════════════════════════════════"
     puts ""
@@ -129,7 +129,7 @@ class StellingBanjos::Cli
     elsif input.to_i.between?(1, StellingBanjos::Banjos.all.length)
       puts "    Loading...".colorize(:red)
       info_page_display(input)
-    elsif input.downcase == "catelog"
+    elsif input.downcase == "catalog"
       display_banjos
     else
       puts ""
