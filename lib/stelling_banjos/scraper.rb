@@ -1,6 +1,9 @@
+require 'pry'
+require 'open-uri'
 class StellingBanjos::Scraper
 
   @@all = []
+
 
   def self.scrape_catalog_page(link)
     catalog = Nokogiri::HTML(open(link))

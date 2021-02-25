@@ -1,3 +1,4 @@
+require 'pry'
 class StellingBanjos::Cli
 
   LINK = "https://www.elderly.com/collections/stelling"
